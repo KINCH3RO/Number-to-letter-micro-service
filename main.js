@@ -11,22 +11,44 @@ let langaugeArray =["en","fr","es","az","pt","ar","eo","vi","uk","id",]
 app.get('/api', function (req, res) {
     let lang=req.query.lang;
     let number=req.query.number;
-     console.log(number);
-     console.log(lang);
+     
     if(number==undefined || isNaN(number)){
+
         res.json({error_Code:205,error:"Wrong number format"})
         return;
     }
 
     if(!langaugeArray.includes(lang) && lang !=undefined){
+
         res.json({error_Code:206,error:"Wrong language format"})
         return;
     }
 
     if(lang==undefined){
-      res.json({value:writtenNumber(number),lang:"en"})
+      if(number.toString().includes(".")){
+         let numbers = number.split(".");
+         let trueNumber = numbers[0];
+         let decimal =  numbers[1];
+         console.log(numbers)
+         console.log(trueNumber)
+         console.log(decimal)
+         res.json({value:writtenNumber(trueNumber),decimal:writtenNumber(decimal),lang:"en"})
+
+      }else{
+        res.json({value:writtenNumber(number),decimal:writtenNumber(0),lang:"en"})
+      }
+     
     }else{
-        res.json({value:writtenNumber(number,{lang: lang}),lang})
+        if(number.toString().includes(".")){
+            let numbers = number.split(".");
+            let trueNumber = numbers[0];
+            let decimal =  numbers[1];
+            res.json({value:writtenNumber(trueNumber,{lang: lang}),decimal:writtenNumber(decimal,{lang: lang}),lang:"en"})
+   
+         }else{
+           res.json({value:writtenNumber(number,{lang: lang}),decimal:writtenNumber(0,{lang: lang}),lang:"en"})
+         }
+     
     }
     
   
