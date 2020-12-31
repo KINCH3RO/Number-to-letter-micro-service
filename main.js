@@ -28,25 +28,23 @@ app.get('/api', function (req, res) {
       if(number.toString().includes(".")){
          let numbers = number.split(".");
          let trueNumber = numbers[0];
-         let decimal =  numbers[1];
-         console.log(numbers)
-         console.log(trueNumber)
-         console.log(decimal)
-         res.json({value:writtenNumber(trueNumber),decimal:writtenNumber(decimal),lang:"en"})
+         let Decimal =  numbers[1];
+         
+         res.json({value:writtenNumber(trueNumber),Decimal:writtenNumber(Decimal),lang:"en"})
 
       }else{
-        res.json({value:writtenNumber(number),decimal:writtenNumber(0),lang:"en"})
+        res.json({value:writtenNumber(number),Decimal:writtenNumber(0),lang:"en"})
       }
      
     }else{
         if(number.toString().includes(".")){
             let numbers = number.split(".");
             let trueNumber = numbers[0];
-            let decimal =  numbers[1];
-            res.json({value:writtenNumber(trueNumber,{lang: lang}),decimal:writtenNumber(decimal,{lang: lang}),lang:"en"})
+            let Decimal =  numbers[1];
+            res.json({value:writtenNumber(trueNumber,{lang: lang}),Decimal:writtenNumber(Decimal,{lang: lang}),lang:"en"})
    
          }else{
-           res.json({value:writtenNumber(number,{lang: lang}),decimal:writtenNumber(0,{lang: lang}),lang:"en"})
+           res.json({value:writtenNumber(number,{lang: lang}),Decimal:writtenNumber(0,{lang: lang}),lang:"en"})
          }
      
     }
